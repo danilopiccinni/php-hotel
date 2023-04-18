@@ -1,4 +1,7 @@
 <?php
+    
+    $parcheggio = $_GET['parcheggio'] ?? '';
+    $voto = $_GET['voto'] ?? '';
 
     $hotels = [
         [
@@ -54,6 +57,24 @@
 </head>
 <body>
 
+<form action="index.php">
+    <label >parcheggio</label>
+    <input type="checkbox" name="parcheggio">
+
+    <select name="voto" id="">
+        <option value="0">scegli voto</option>
+        <option value="1">1</option>
+        <option value="2">2</option>
+        <option value="3">3</option>
+        <option value="4">4</option>
+        <option value="5">5</option>
+    </select>
+
+    <!-- <input type="text" name="parcheggio" placeholder="parcheggio"> -->
+    <!-- <input type="text" name="voto" placeholder="voto"> -->
+    <button type="submit">filtra</button>
+</form>
+
 <table class="table">
   <thead>
     <tr>
@@ -71,7 +92,7 @@
     <?php 
     foreach($hotels as $hotel) {
     ?>
-    <tr>
+    <tr class=" <?php echo $hotel['parking']==false && $parcheggio == 'on' ? 'd-none' : '' ?>  <?php echo $hotel['vote'] < $voto && $voto != 0 ? 'd-none' : '' ?>">
         <?php 
         foreach($hotel as $key => $info) {
         ?>
